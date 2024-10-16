@@ -1,0 +1,72 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f6f8fa;
+}
+body {
+    font-family: 'Jua', sans-serif; /* Cambiar a la fuente Jua */
+    background-color: #f6f8fa;
+}
+
+/* Resto de estilos... */
+
+
+#hero-section {
+    background: linear-gradient(90deg, #fef5e7 50%, #e9f7fe 50%);
+    padding: 50px 0;
+}
+
+img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 3.5rem;
+    color: #507dbc;
+    margin-bottom: 1rem;
+}
+
+p.lead {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #607d8b;
+}
+
+.pastel-btn {
+    font-size: 1.25rem;
+    padding: 0.75rem 2rem;
+    background-color: #c3ddf5;
+    color: #40514e;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pastel-btn:hover {
+    background-color: #f5cbcb;
+    color: #000;
+}
+
+.navbar {
+    background-color: #faf3dd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    font-weight: bold;
+    color: #607d8b;
+}
+
+.nav-link:hover {
+    color: #507dbc;
+}
+
+footer.pastel-footer {
+    background-color: #f4d8cd;
+    color: #607d8b;
+}
+
+footer.pastel-footer p {
+    margin: 0;
+}
+
