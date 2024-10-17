@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCare - Gestión de Veterinaria</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/estilos/styles.css">
+    <style>
+        body {
+            font-family: 'Jua', sans-serif;
+            background-color: #f6f8fa;
+        }
+        .sidebar {
+            background-color: #007bff;
+            color: #fff;
+            height: 100vh;
+            padding: 1rem;
+            text-align: center;
+        }
+        .sidebar img {
+            width: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+        .sidebar h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .sidebar p {
+            font-size: 1rem;
+        }
+        .main-content {
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        .navbar-brand img {
+            width: 40px; 
+            margin-right: 0.5rem; 
+        }
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/Multimedia/logo.png" alt="PetCare Logo">
+                PetCare
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/frontend/sesion.html">Sign Up</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/quienesSomos.html">About Us</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/portafolio.html">Portfolio</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Contacto.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 sidebar">
+                <img src="/Multimedia/pet-photo.jpg" alt="Mascota">
+                <h3 id="pet-name">Nombre de la Mascota</h3>
+                <p id="pet-details">Detalles de la mascota</p>
+            </div>
+            <!-- Main Content -->
+            <div class="col-md-6 main-content">
+                <h2>Seleccionar Dueño y Mascota</h2>
+                <form id="selectOwnerPetForm">
+                    <div class="mb-3">
+                        <label for="selectOwner" class="form-label">Seleccione el Dueño</label>
+                        <select id="selectOwner" class="form-select" required>
+                            <option selected disabled value="">Seleccionar...</option>
+                            <!-- Dueños se llenarán aquí -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="selectPet" class="form-label">Seleccione la Mascota</label>
+                        <select id="selectPet" class="form-select" required>
+                            <option selected disabled value="">Seleccionar...</option>
+                            <!-- Mascotas se llenarán aquí -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cargar Información</button>
+                </form>
+                <h2 class="mt-4">Desparasitaciones</h2>
+                <form id="dewormingForm">
+                    <div class="mb-3">
+                        <label for="antiparasitario" class="form-label">Seleccione el antiparasitario</label>
+                        <select id="antiparasitario" class="form-select" required>
+                            <option selected disabled value="">Seleccionar...</option>
+                            <option value="1">Antiparasitario 1</option>
+                            <option value="2">Antiparasitario 2</option>
+                            <option value="3">Antiparasitario 3</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha de desparasitaci&oacute;n</label>
+                        <input type="date" id="fecha" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
+                <div class="mt-4">
+                    <h4>Historial de Desparasitaciones</h4>
+                    <ul class="list-group" id="desparasitation-history">
+                        <!-- Historial se llenará aquí -->
+                    </ul>
+                </div>
+            </div>
+            <!-- Clinical History -->
+            <div class="col-md-3">
+                <h4>Historia Cl&iacute;nica</h4>
+                <input type="text" class="form-control mb-3" placeholder="Buscar historia...">
+                <ul class="list-group" id="clinical-history">
+                    <!-- Historial se llenará aquí -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <p>&copy; 2024 PetCare. Todos los derechos reservados.</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // Obtener información de los dueños
+            const response = await fetch('http://127.0.0.1:3001/owners');
+            const owners = await response.json();
+            const selectOwner = document.getElementById('selectOwner');
+            owners.forEach(owner => {
+                const option = document.createElement('option');
+                option.value = owner.owner_id;
+                option.textContent = owner.name;
+                selectOwner.appendChild(option);
+            });
+
+            // Obtener mascotas del dueño seleccionado
+            selectOwner.addEventListener('change', async () => {
+                const ownerId = selectOwner.value;
+                const response = await fetch(`http://127.0.0.1:3001/owner_pets/${ownerId}`);
+                const pets = await response.json();
+                const selectPet = document.getElementById('selectPet');
+                selectPet.innerHTML = '<option selected disabled value="">Seleccionar...</option>'; // Limpiar mascotas anteriores
+                pets.forEach(pet => {
+                    const option = document.createElement('option');
+                    option.value = pet.pet_id;
+                    option.textContent = pet.name;
+                    selectPet.appendChild(option);
+                });
+            });
+
+            // Cargar información de la mascota seleccionada
+            document.getElementById('selectOwnerPetForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const petId = document.getElementById('selectPet').value;
+
+                // Obtener información de la mascota
+                const petResponse = await fetch(`http://127.0.0.1:3001/mascota/${petId}`);
+                const pet = await petResponse.json();
+                document.getElementById('pet-name').textContent = pet.name;
+                document.getElementById('pet-details').textContent = `${pet.species}, ${pet.breed}, ${calculateAge(pet.birth_date)}`;
+
+                // Obtener historial médico
+                const historyResponse = await fetch(`http://127.0.0.1:3001/historial/${petId}`);
+                const history = await historyResponse.json();
+                const historyList = document.getElementById('clinical-history');
+                historyList.innerHTML = ''; // Limpiar historial anterior
+                history.forEach(entry => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.textContent = `${entry.visit_date} - ${entry.diagnosis}`;
+                    historyList.appendChild(listItem);
+                });
+
+                // Obtener historial de desparasitaciones
+                const desparasitationList = document.getElementById('desparasitation-history');
+                desparasitationList.innerHTML = ''; // Limpiar historial anterior
+                history.filter(entry => entry.treatment.includes('Desparasitación')).forEach(entry => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.textContent = `${entry.visit_date} - ${entry.treatment}`;
+                    desparasitationList.appendChild(listItem);
+                });
+            });
+        } catch (error) {
+            console.error('Error al obtener datos:', error);
+        }
+    });
+
+    function calculateAge(birthDate) {
+        const birth = new Date(birthDate);
+        const now = new Date();
+        const diff = now - birth;
+        const age = new Date(diff).getUTCFullYear() - 1970;
+        return age + ' años';
+    }
+</script>
+</body>
+</html>

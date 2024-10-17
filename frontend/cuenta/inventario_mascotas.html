@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCare - Inventario y Mascotas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/estilos/styles.css">
+    <style>
+        body {
+            font-family: 'Jua', sans-serif;
+            background-color: #f6f8fa;
+        }
+        .navbar-brand img {
+            width: 40px; 
+            margin-right: 0.5rem; 
+        }
+        .main-content {
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        .table-responsive {
+            margin-top: 2rem;
+        }
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/Multimedia/logo.png" alt="PetCare Logo">
+                PetCare
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/frontend/sesion.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/quienesSomos.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/portafolio.html">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Contacto.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container main-content">
+        <h2>Inventario y Mascotas</h2>
+        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addOwnerModal">Añadir Dueño</button>
+        <button class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#addPetModal">Añadir Mascota</button>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nombre del Dueño</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Nombre de la Mascota</th>
+                        <th>Especie</th>
+                        <th>Raza</th>
+                        <th>Fecha de Nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody id="owners-pets-table">
+                    <!-- Datos se llenarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Add Owner Modal -->
+    <div class="modal fade" id="addOwnerModal" tabindex="-1" aria-labelledby="addOwnerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addOwnerModalLabel">Añadir Dueño</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addOwnerForm">
+                        <div class="mb-3">
+                            <label for="ownerName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="ownerName" name="ownerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ownerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="ownerEmail" name="ownerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ownerPhone" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="ownerPhone" name="ownerPhone" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Añadir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Pet Modal -->
+<div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addPetModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPetModalLabel">Añadir Mascota</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addPetForm">
+                    <div class="mb-3">
+                        <label for="petName" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="petName" name="petName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="petSpecies" class="form-label">Especie</label>
+                        <input type="text" class="form-control" id="petSpecies" name="petSpecies" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="petBreed" class="form-label">Raza</label>
+                        <input type="text" class="form-control" id="petBreed" name="petBreed" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="petBirthDate" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="petBirthDate" name="petBirthDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ownerId" class="form-label">Dueño</label>
+                        <select class="form-select" id="ownerId" name="ownerId" required>
+                            <!-- Dueños se llenarán aquí -->
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 PetCare. Todos los derechos reservados.</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // Obtener información de los dueños y mascotas
+            const response = await fetch('http://127.0.0.1:3001/inventario_mascotas');
+            const data = await response.json();
+            
+            const tableBody = document.getElementById('owners-pets-table');
+            tableBody.innerHTML = ''; // Asegúrate de limpiar la tabla antes de llenarla
+            
+            const ownerSelect = document.getElementById('ownerId');
+            ownerSelect.innerHTML = ''; // Limpiar opciones anteriores
+            
+            const uniqueOwners = new Set(); // Usamos un Set para evitar duplicados
+            
+            data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.owner_name}</td>
+                    <td>${entry.email}</td>
+                    <td>${entry.phone}</td>
+                    <td>${entry.pet_name}</td>
+                    <td>${entry.species}</td>
+                    <td>${entry.breed}</td>
+                    <td>${entry.birth_date}</td>
+                `;
+                tableBody.appendChild(row);
+                
+                // Añadir dueño al select si no está ya
+                if (!uniqueOwners.has(entry.owner_id)) {
+                    uniqueOwners.add(entry.owner_id);
+                    const option = document.createElement('option');
+                    option.value = entry.owner_id;
+                    option.textContent = entry.owner_name;
+                    ownerSelect.appendChild(option);
+                }
+            });
+        } catch (error) {
+            console.error('Error al obtener datos:', error);
+        }
+    });
+
+    // Añadir nuevo dueño
+    document.getElementById('addOwnerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const ownerName = document.getElementById('ownerName').value;
+        const ownerEmail = document.getElementById('ownerEmail').value;
+        const ownerPhone = document.getElementById('ownerPhone').value;
+        try {
+            const response = await fetch('http://127.0.0.1:3001/add_owner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: ownerName, email: ownerEmail, phone: ownerPhone })
+            });
+            if (response.ok) {
+                alert('Dueño añadido exitosamente');
+                location.reload();
+            } else {
+                alert('Error al añadir dueño');
+            }
+        } catch (error) {
+            console.error('Error al añadir dueño:', error);
+        }
+    });
+
+    // Añadir nueva mascota
+    document.getElementById('addPetForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const petName = document.getElementById('petName').value;
+        const petSpecies = document.getElementById('petSpecies').value;
+        const petBreed = document.getElementById('petBreed').value;
+        const petBirthDate = document.getElementById('petBirthDate').value;
+        const ownerId = document.getElementById('ownerId').value;
+        try {
+            const response = await fetch('http://127.0.0.1:3001/add_pet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name: petName, species: petSpecies, breed: petBreed, birth_date: petBirthDate, owner_id: ownerId })
+            });
+            if (response.ok) {
+                alert('Mascota añadida exitosamente');
+                location.reload();
+            } else {
+                alert('Error al añadir mascota');
+            }
+        } catch (error) {
+            console.error('Error al añadir mascota:', error);
+        }
+    });
+</script>
