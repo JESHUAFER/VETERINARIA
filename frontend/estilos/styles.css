@@ -1,0 +1,102 @@
+/* Ajustes generales */
+body {
+    font-family: 'Jua', sans-serif;
+    background-color: #f6f8fa;
+}
+
+/* Estilos para la navbar */
+.navbar {
+    background-color: #fff;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Hero Section */
+
+/* Estilos actualizados para la sección hero */
+.hero-section {
+    background: url('/frontend/Multimedia/nosotros3.jpg') no-repeat center center;
+    background-size: cover;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+
+
+   
+
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero-section p.lead {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.hero-section .btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.hero-section .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Services Section */
+.service-section .col-md-4 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.service-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.service-section h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.service-section p {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+/* Footer */
+footer {
+    background-color: #007bff;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
