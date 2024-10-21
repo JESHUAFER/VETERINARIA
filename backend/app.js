@@ -1,36 +1,14 @@
 const express = require('express');
-
 const mysql = require('mysql2/promise');
-const path = require('path');  
-const cors = require('cors');  
-const app = express();
-
+const path = require('path');
+const cors = require('cors');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const plainTextPassword = 'admin123';
 
-bcrypt.hash(plainTextPassword, saltRounds, function(err, hash) {
-    if (err) {
-        console.error(err);
-        return;
-    }
-    // Usa este hash en tu consulta SQL
-    console.log(hash);
-});
-
-
-// Middleware to serve static files and correct MIME types
-app.use('/frontend', express.static(path.join(__dirname, '../frontend'), {
-    setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css');
-        } else if (filePath.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript');
-        }
-    }
-}));
+const app = express();
+app.use(cors());
 app.use(express.json());
-app.use(cors());  
 
 // Conexión a la base de datos con manejo de errores
 const db = mysql.createPool({
@@ -44,29 +22,43 @@ db.getConnection()
     .then(() => console.log('Conexión a la base de datos exitosa'))
     .catch(err => console.error('Error al conectar a la base de datos:', err));
 
-// Servir archivos estáticos desde el directorio 'frontend'
-app.use(express.static(path.join(__dirname, '../frontend')));
+// Middleware to serve static files and correct MIME types
+app.use('/frontend', express.static(path.join(__dirname, '../frontend'), {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+        } else if (filePath.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+        }
+    }
+}));
+
+app.use(express.json());
+app.use(cors());
+
+bcrypt.hash(plainTextPassword, saltRounds, function(err, hash) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    console.log(hash);
+});
 
 // Ruta de login
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    
     try {
         const [rows] = await db.execute('SELECT * FROM user_auth WHERE email = ?', [email]);
-
         if (rows.length > 0) {
             const user = rows[0];
             const match = await bcrypt.compare(password, user.password_hash);
-
             if (match) {
-                // Si la autenticación es exitosa, crea una cookie
                 res.cookie('session_id', 'valor_de_la_sesion', {
-                    httpOnly: true,      // Protege la cookie de acceso desde JavaScript
-                    secure: true,        // Solo se enviará en conexiones HTTPS
-                    sameSite: 'None',    // Permitir en contextos de terceros
-                    maxAge: 24 * 60 * 60 * 1000  // Expiración de 24 horas
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'None',
+                    maxAge: 24 * 60 * 60 * 1000
                 });
-
                 res.json({ message: 'Login exitoso' });
             } else {
                 res.status(401).json({ message: 'Contraseña incorrecta' });
@@ -79,11 +71,11 @@ app.post('/login', async (req, res) => {
     }
 });
 
-
 // Ruta para servir el archivo 'sesion.html'
 app.get('/sesion', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/sesion.html'));
 });
+
 // Ruta para obtener información de la mascota
 app.get('/mascota/:id', async (req, res) => {
     try {
@@ -107,6 +99,7 @@ app.get('/historial/:id', async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 });
+
 // Ruta para añadir un nuevo dueño
 app.post('/add_owner', async (req, res) => {
     const { name, email, phone } = req.body;
@@ -120,6 +113,7 @@ app.post('/add_owner', async (req, res) => {
 });
 
 // Ruta para añadir una nueva mascota
+// Añadir una nueva mascota
 app.post('/add_pet', async (req, res) => {
     const { name, species, breed, birth_date, owner_id } = req.body;
     try {
@@ -130,8 +124,6 @@ app.post('/add_pet', async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 });
-// Ruta para obtener información de los dueños y sus mascotas
-
 
 // Ruta para obtener información de los dueños y sus mascotas
 app.get('/inventario_mascotas', async (req, res) => {
@@ -148,6 +140,7 @@ app.get('/inventario_mascotas', async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 });
+
 // Obtener información de todos los dueños
 app.get('/owners', async (req, res) => {
     try {
@@ -186,17 +179,153 @@ app.get('/mascota/:id', async (req, res) => {
 });
 
 // Obtener historial médico de una mascota
-app.get('/historial/:id', async (req, res) => {
+app.get('/historial/:petId', async (req, res) => {
+    const petId = req.params.petId;
     try {
-        const [rows] = await db.execute('SELECT visit_date, diagnosis, treatment FROM medical_history WHERE pet_id = ?', [req.params.id]);
+        const [rows] = await db.query('SELECT visit_date, diagnosis FROM medical_history WHERE pet_id = ?', [petId]);
         res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error al obtener historial médico');
+    }
+});
+
+// Ruta para añadir nueva entrada al historial médico
+app.post('/add_medical_history', async (req, res) => {
+    const { pet_id, visit_date, diagnosis } = req.body;
+    console.log('Datos recibidos:', req.body); // Asegúrate de que los datos lleguen correctamente
+    try {
+        const [result] = await db.execute('INSERT INTO medical_history (pet_id, visit_date, diagnosis) VALUES (?, ?, ?)', [pet_id, visit_date, diagnosis]);
+        const history_id = result.insertId; // Obtener el ID del historial médico recién insertado
+        res.json({ message: 'Entrada de historial médico añadida exitosamente', history_id: history_id });
     } catch (error) {
-        console.error('Error en la petición:', error);
+        console.error('Error al añadir entrada de historial médico:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 });
 
+// Ruta para añadir nuevo tratamiento
+app.post('/add_treatment', async (req, res) => {
+    const { history_id, treatment_description } = req.body;
+    try {
+        await db.execute('INSERT INTO treatment (history_id, treatment_description) VALUES (?, ?)', [history_id, treatment_description]);
+        res.json({ message: 'Tratamiento añadido exitosamente' });
+    } catch (error) {
+        console.error('Error al añadir tratamiento:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
 
+// Ruta para añadir nueva medicación
+app.post('/add_medication', async (req, res) => {
+    const { history_id, medication_name, dosage } = req.body;
+    try {
+        await db.execute('INSERT INTO medication (history_id, medication_name, dosage) VALUES (?, ?, ?)', [history_id, medication_name, dosage]);
+        res.json({ message: 'Medicación añadida exitosamente' });
+    } catch (error) {
+        console.error('Error al añadir medicación:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+// Ruta para obtener todas las citas
+app.get('/appointments', async (req, res) => {
+    try {
+        const [rows] = await db.execute(`
+            SELECT 
+                a.appointment_id, a.appointment_date, a.vet_name, a.notes, 
+                o.name AS owner_name, 
+                p.name AS pet_name 
+            FROM appointment a
+            JOIN pet p ON a.pet_id = p.pet_id
+            JOIN owner o ON p.owner_id = o.owner_id
+        `);
+        res.json(rows);
+    } catch (error) {
+        console.error('Error al obtener citas:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+// Ruta para agregar una nueva cita
+app.post('/appointments', async (req, res) => {
+    const { pet_id, appointment_date, vet_name, notes } = req.body;
+    try {
+        const result = await db.execute('INSERT INTO appointment (pet_id, appointment_date, vet_name, notes) VALUES (?, ?, ?, ?)', [pet_id, appointment_date, vet_name, notes]);
+        res.json({ message: 'Cita añadida exitosamente' });
+    } catch (error) {
+        console.error('Error al añadir cita:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+// Ruta para editar una cita existente
+app.put('/appointments/:id', async (req, res) => {
+    const { id } = req.params;
+    const { pet_id, appointment_date, vet_name, notes } = req.body;
+    try {
+        const result = await db.execute('UPDATE appointment SET pet_id = ?, appointment_date = ?, vet_name = ?, notes = ? WHERE appointment_id = ?', [pet_id, appointment_date, vet_name, notes, id]);
+        res.json({ message: 'Cita actualizada exitosamente' });
+    } catch (error) {
+        console.error('Error al actualizar cita:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+// Ruta para eliminar una cita
+app.delete('/appointments/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await db.execute('DELETE FROM appointment WHERE appointment_id = ?', [id]);
+        res.json({ message: 'Cita eliminada exitosamente' });
+    } catch (error) {
+        console.error('Error al eliminar cita:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+// Ruta para obtener todas las citas
+app.get('/appointments', async (req, res) => {
+    try {
+        const [rows] = await db.execute(`
+            SELECT 
+                a.appointment_id, a.appointment_date, a.vet_name, a.notes, 
+                o.name AS owner_name, 
+                p.name AS pet_name 
+            FROM appointment a
+            JOIN pet p ON a.pet_id = p.pet_id
+            JOIN owner o ON p.owner_id = o.owner_id
+        `);
+        res.json(rows);
+    } catch (error) {
+        console.error('Error al obtener citas:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+// Ruta para agregar una nueva cita
+app.post('/appointments', async (req, res) => {
+    const { pet_id, appointment_date, vet_name, notes } = req.body;
+    try {
+        const result = await db.execute('INSERT INTO appointment (pet_id, appointment_date, vet_name, notes) VALUES (?, ?, ?, ?)', [pet_id, appointment_date, vet_name, notes]);
+        res.json({ message: 'Cita añadida exitosamente' });
+    } catch (error) {
+        console.error('Error al añadir cita:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
+// Ruta para editar una cita existente
+app.put('/appointments/:id', async (req, res) => {
+    const { id } = req.params;
+    const { pet_id, appointment_date, vet_name, notes } = req.body;
+    try {
+        const result = await db.execute('UPDATE appointment SET pet_id = ?, appointment_date = ?, vet_name = ?, notes = ? WHERE appointment_id = ?', [pet_id, appointment_date, vet_name, notes, id]);
+        res.json({ message: 'Cita actualizada exitosamente' });
+    } catch (error) {
+        console.error('Error al actualizar cita:', error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
 
 // Iniciar el servidor
 app.listen(3001, () => {

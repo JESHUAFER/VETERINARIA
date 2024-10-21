@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCare - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/estilos/styles.css">
+    <style>
+        body {
+            font-family: 'Jua', sans-serif;
+            background-color: #f6f8fa;
+        }
+        .sidebar {
+            background-color: #007bff;
+            color: #fff;
+            height: 100vh;
+            padding: 1rem;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .sidebar a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+        .main-content {
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        .dashboard-card {
+            background-color: #e9ecef;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        footer {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/frontend/dashboard.html">
+                <img src="/Multimedia/logo.png" alt="PetCare Logo" style="width: 40px; margin-right: 0.5rem;">
+                PetCare
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/frontend/sesion.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/quienesSomos.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/portafolio.html">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Contacto.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/frontend/logout.html">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="/frontend/cuenta/inventario_mascotas.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/caja.html" class="nav-link">Caja</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/cuenta/agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/productos.html" class="nav-link">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/cuenta/gestion_veterinaria.html" class="nav-link">Stock</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/ventas.html" class="nav-link">Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/proveedores.html" class="nav-link">Proveedores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/estadisticas.html" class="nav-link">Estadísticas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/micuenta.html" class="nav-link">Mi cuenta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/logout.html" class="nav-link">Salir</a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Main Content -->
+            <main class="col-md-10 main-content">
+                <div class="row">
+                    <div class="col-md-3 dashboard-card">
+                        <h3>Clientes Totales</h3>
+                        <p>38</p>
+                    </div>
+                    <div class="col-md-3 dashboard-card">
+                        <h3>Visitas</h3>
+                        <p>77</p>
+                    </div>
+                    <div class="col-md-3 dashboard-card">
+                        <h3>Vacunas Vencidas</h3>
+                        <p>15</p>
+                    </div>
+                    <div class="col-md-3 dashboard-card">
+                        <h3>Ingresos y Egresos</h3>
+                        <p>$1500</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3 dashboard-card">
+                        <h3>Vacunas por Vencer</h3>
+                        <p>64</p>
+                    </div>
+                    <div class="col-md-3 dashboard-card">
+                        <h3>Desparasitaciones</h3>
+                        <p>6</p>
+                    </div>
+                    <div class="col-md-3 dashboard-card">
+                        <h3>Turnos</h3>
+                        <p>64</p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h4>Agenda</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">Hoy - 15:00 - Cliente 1</li>
+                            <li class="list-group-item">Hoy - 16:00 - Cliente 2</li>
+                            <li class="list-group-item">Semana - 10:00 - Cliente 3</li>
+                            <li class="list-group-item">Mes - 11:00 - Cliente 4</li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 PetCare. Todos los derechos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
