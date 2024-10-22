@@ -16,7 +16,7 @@
                 alert('Login exitoso');
                 window.location.href = '/frontend/cuenta/dashboard.html'; // Redirigir al dashboard o cualquier otra página
             } else {
-                alert(data.message || 'Error al iniciar sesión');
+              alert(data.message || 'Error al iniciar sesión');
             }
         } catch (error) {
             console.error('Error en la petición', error);
