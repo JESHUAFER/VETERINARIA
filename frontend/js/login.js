@@ -14,7 +14,7 @@
             const data = await response.json();
             if (response.ok) {
                 alert('Login exitoso');
-                window.location.href = '/cuenta/dashboard.html'; // Redirigir al dashboard o cualquier otra página
+                window.location.href = '/frontend/cuenta/dashboard.html'; // Redirigir al dashboard o cualquier otra página
             } else {
                 alert(data.message || 'Error al iniciar sesión');
             }

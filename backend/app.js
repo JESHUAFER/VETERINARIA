@@ -326,6 +326,10 @@ app.put('/appointments/:id', async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 });
+// Ruta para servir el archivo 'index.html'
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
 
 // Iniciar el servidor
 app.listen(3001, () => {
