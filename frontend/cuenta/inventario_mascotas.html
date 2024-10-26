@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/frontend/estilos/styles.css">
+    <link rel="stylesheet" href="/frontend/cuenta/dashboard-inventario.css">
     <style>
         body {
             font-family: 'Jua', sans-serif;
@@ -152,6 +153,49 @@
         </div>
     </div>
 </div>
+<!-- segunda propuesta de inventario -->
+<div class="container1">
+    <!-- Encabezado -->
+    <header>
+        <h1>Inventario de la Veterinaria</h1>
+    </header>
+
+    <!-- Buscador y Botón Agregar -->
+    <section class="actions">
+        <input type="text" id="search" placeholder="Buscar en inventario...">
+        <button class="add-btn">Agregar Producto</button>
+    </section>
+
+    <!-- Tabla de Inventario -->
+    <table class="inventory-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre del Producto</th>
+                <th>Categoría</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Collar para Perros</td>
+                <td>Accesorios</td>
+                <td>20</td>
+                <td>$10.00</td>
+                <td>
+                    <button class="edit-btn">Editar</button>
+                    <button class="delete-btn">Eliminar</button>
+                </td>
+            </tr>
+            <!-- Más filas pueden añadirse aquí dinámicamente -->
+        </tbody>
+    </table>
+</div>
+</body>
+
 <!-- Footer -->
 <footer>
     <p>&copy; 2024 PetCare. Todos los derechos reservados.</p>
