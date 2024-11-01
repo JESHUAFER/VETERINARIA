@@ -5,10 +5,39 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const plainTextPassword = 'admin123';
+const multer = require('multer');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, '/uploads');
+    },
+    filename: function (req, file, cb) {
+        const mimeExtension = {
+            'image/jpeg': '.jpeg',
+            'image/jpg': '.jpg',
+            'image/png': '.png',
+            'image/gif': '.gif',
+        };
+        cb(null, file.fieldname + '-' + Date.now() + mimeExtension[file.mimetype]);
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/gif') {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            req.fileError = 'Formato de archivo no válido';
+        }
+    }
+}).single('petImage');
 
 // Conexión a la base de datos con manejo de errores
 const db = mysql.createPool({
@@ -329,6 +358,38 @@ app.put('/appointments/:id', async (req, res) => {
 // Ruta para servir el archivo 'index.html'
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
+
+
+// Ruta para añadir una nueva mascota con imagen
+app.post('/add_pet', (req, res) => {
+    upload(req, res, async function (err) {
+        if (err) {
+            console.error('Error al cargar la imagen:', err);
+            return res.status(500).json({ message: 'Error al cargar la imagen' });
+        }
+
+        const { name, species, breed, birth_date, owner_id } = req.body;
+        const petImage = req.file ? `/uploads/${req.file.filename}` : null;
+
+        // Validar que los campos requeridos no sean undefined o null
+        if (!name || !species || !breed || !birth_date || !owner_id) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+        }
+
+        try {
+            const result = await db.execute(
+                'INSERT INTO pet (name, species, breed, birth_date, owner_id, pet_image) VALUES (?, ?, ?, ?, ?, ?)', 
+                [name, species, breed, birth_date, owner_id, petImage]
+            );
+            res.status(200).send({ message: 'Mascota añadida exitosamente' });
+        } catch (error) {
+            console.error('Error al añadir mascota:', error);
+            res.status(500).send({ message: 'Error en el servidor' });
+        }
+    });
+
 });
 
 // Iniciar el servidor
