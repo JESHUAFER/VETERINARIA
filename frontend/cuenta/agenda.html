@@ -14,6 +14,23 @@
             font-family: 'Jua', sans-serif;
             background-color: #f6f8fa;
         }
+        .sidebar {
+            background-color: #007bff;
+            color: #fff;
+            height: auto;
+            padding: 1rem;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        .sidebar a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
 
         .navbar-brand img {
             width: 40px;
@@ -81,7 +98,44 @@
             </div>
         </div>
     </nav>
-    <div class="container main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="/frontend/cuenta/inventario_mascotas.html" class="nav-link">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/caja.html" class="nav-link">Caja</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/cuenta/agenda.html" class="nav-link">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/productos.html" class="nav-link">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/cuenta/gestion_veterinaria.html" class="nav-link">Stock</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/ventas.html" class="nav-link">Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/proveedores.html" class="nav-link">Proveedores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/estadisticas.html" class="nav-link">Estadísticas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/micuenta.html" class="nav-link">Mi cuenta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/frontend/logout.html" class="nav-link">Salir</a>
+                    </li>
+                </ul>
+            </nav>
+    <div class="col-md-10 main-content">
         <h2 class="text-primary">Agenda de Citas</h2>
         <form id="appointmentForm">
             <div class="row">
@@ -139,7 +193,9 @@
             </table>
         </div>
     </div>
-    @section Scripts{
+</div>
+</div>
+
         <script>
             document.addEventListener('DOMContentLoaded', async () => {
                 try {
@@ -263,7 +319,7 @@
                 }
             });
         </script>
-    }
+    
     
 </body>
 
