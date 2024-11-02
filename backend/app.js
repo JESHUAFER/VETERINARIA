@@ -699,7 +699,7 @@ app.post('/appointments', async (req, res) => {
 });
 
 // Ruta para editar una cita existente
-app.put('/appointments/:id', async (req, res) => {
+/*app.put('/appointments/:id', async (req, res) => {
     const { id } = req.params;
     const { pet_id, appointment_date, vet_name, notes } = req.body;
     try {
@@ -710,6 +710,29 @@ app.put('/appointments/:id', async (req, res) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 });
+*/
+app.get('/appointments/:id', (req, res) => {
+  const { id } = req.params;
+
+  const query = 'SELECT * FROM appointment WHERE appointment_id = ?';
+  db.query(query, [id], (err, result) => {
+    if (err) {
+      console.error('Error al obtener los detalles de la cita:', err);
+      return res.status(500).json({ error: 'Error al obtener los detalles de la cita' });
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ error: 'Cita no encontrada' });
+    }
+
+    res.json(result[0]);
+  });
+});
+
+
+
+
+
 // Ruta para servir el archivo 'index.html'
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
