@@ -189,77 +189,82 @@
                 </div>
 
                 <!-- Add Pet Modal -->
-<div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addPetModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addPetModalLabel">Añadir Mascota</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="addPetForm" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="petName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="petName" name="petName" required>
+                <div class="modal fade" id="addPetModal" tabindex="-1" aria-labelledby="addPetModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addPetModalLabel">Añadir Mascota</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addPetForm" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="petName" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="petName" name="petName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="petSpecies" class="form-label">Especie</label>
+                                        <input type="text" class="form-control" id="petSpecies" name="petSpecies"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="petBreed" class="form-label">Raza</label>
+                                        <input type="text" class="form-control" id="petBreed" name="petBreed" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="petBirthDate" class="form-label">Fecha de Nacimiento</label>
+                                        <input type="date" class="form-control" id="petBirthDate" name="petBirthDate"
+                                            required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ownerId" class="form-label">Dueño</label>
+                                        <select class="form-select" id="ownerId" name="ownerId" required>
+                                            <!-- Dueños se llenarán aquí -->
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="petImage" class="form-label">Imagen de la Mascota</label>
+                                        <input type="file" class="form-control" id="petImage" name="petImage"
+                                            accept="image/*" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Añadir</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="petSpecies" class="form-label">Especie</label>
-                        <input type="text" class="form-control" id="petSpecies" name="petSpecies" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="petBreed" class="form-label">Raza</label>
-                        <input type="text" class="form-control" id="petBreed" name="petBreed" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="petBirthDate" class="form-label">Fecha de Nacimiento</label>
-                        <input type="date" class="form-control" id="petBirthDate" name="petBirthDate" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="ownerId" class="form-label">Dueño</label>
-                        <select class="form-select" id="ownerId" name="ownerId" required>
-                            <!-- Dueños se llenarán aquí -->
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="petImage" class="form-label">Imagen de la Mascota</label>
-                        <input type="file" class="form-control" id="petImage" name="petImage" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Añadir</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-  </div>
-            </div>
-        </div>
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2024 PetCare. Todos los derechos reservados.</p>
-        </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 PetCare. Todos los derechos reservados.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-        <script>
-            // Asegúrate de que el código se ejecuta después de que el DOM esté completamente cargado
-            document.addEventListener('DOMContentLoaded', async () => {
-                try {
-                    const response = await fetch('http://127.0.0.1:3001/inventario_mascotas');
-                    const data = await response.json();
-                    const tableBody = document.getElementById('owners-pets-table');
+    <script>
+        // Asegúrate de que el código se ejecuta después de que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:3001/inventario_mascotas');
+                const data = await response.json();
+                const tableBody = document.getElementById('owners-pets-table');
 
-                    // Verifica que tableBody existe en el DOM
-                    if (!tableBody) {
-                        console.error('Error: elemento tableBody no encontrado.');
-                        return;
-                    }
+                // Verifica que tableBody existe en el DOM
+                if (!tableBody) {
+                    console.error('Error: elemento tableBody no encontrado.');
+                    return;
+                }
 
-                    tableBody.innerHTML = ''; // Asegúrate de limpiar la tabla antes de llenarla
-                    const ownerSelect = document.getElementById('ownerId');
-                    ownerSelect.innerHTML = ''; // Limpiar opciones anteriores
-                    const uniqueOwners = new Set(); // Usamos un Set para evitar duplicados
-                    data.forEach(entry => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
+                tableBody.innerHTML = ''; // Asegúrate de limpiar la tabla antes de llenarla
+                const ownerSelect = document.getElementById('ownerId');
+                ownerSelect.innerHTML = ''; // Limpiar opciones anteriores
+                const uniqueOwners = new Set(); // Usamos un Set para evitar duplicados
+                data.forEach(entry => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
                 <td>${entry.owner_name}</td>
                 <td>${entry.email}</td>
                 <td>${entry.phone}</td>
@@ -269,77 +274,128 @@
                 <td>${entry.birth_date}</td>
                 <td><img src="${entry.pet_image}" alt="Imagen de ${entry.pet_name}" class="img-thumbnail" style="max-width: 100px;"></td>
             `;
-                        tableBody.appendChild(row);
-                        // Añadir dueño al select si no está ya
-                        if (!uniqueOwners.has(entry.owner_id)) {
-                            uniqueOwners.add(entry.owner_id);
-                            const option = document.createElement('option');
-                            option.value = entry.owner_id;
-                            option.textContent = entry.owner_name;
-                            ownerSelect.appendChild(option);
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error al obtener datos:', error);
+                    tableBody.appendChild(row);
+                    // Añadir dueño al select si no está ya
+                    if (!uniqueOwners.has(entry.owner_id)) {
+                        uniqueOwners.add(entry.owner_id);
+                        const option = document.createElement('option');
+                        option.value = entry.owner_id;
+                        option.textContent = entry.owner_name;
+                        ownerSelect.appendChild(option);
+                    }
+                });
+            } catch (error) {
+                console.error('Error al obtener datos:', error);
+            }
+        });
+
+        // Añadir nuevo dueño
+        //       document.getElementById('addPetForm').addEventListener('submit', async (e) => {
+        // e.preventDefault();
+        // const formData = new FormData();
+        //formData.append('name', document.getElementById('petName').value);
+        //formData.append('species', document.getElementById('petSpecies').value);
+        // formData.append('breed', document.getElementById('petBreed').value);
+        //formData.append('birth_date', document.getElementById('petBirthDate').value);
+        //formData.append('owner_id', document.getElementById('ownerId').value);
+        //formData.append('petImage', document.getElementById('petImage').files[0]);
+
+        //try {
+        //   const response = await fetch('http://127.0.0.1:3001/add_pet', {
+        //      method: 'POST',
+        //     body: formData
+        //});
+        // if (response.ok) {
+        //   alert('Mascota añadida exitosamente');
+        //    location.reload();
+        // } else {
+        //      alert('Error al añadir mascota');
+        //   }
+        // } catch (error) {
+        //    console.error('Error al añadir mascota:', error);
+        //  }
+        //});
+
+
+        // Añadir nueva mascota con imagen
+        document.getElementById('addPetForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+
+            // Agregar todos los campos al FormData
+            formData.append('name', document.getElementById('petName').value);
+            formData.append('species', document.getElementById('petSpecies').value);
+            formData.append('breed', document.getElementById('petBreed').value);
+            formData.append('birth_date', document.getElementById('petBirthDate').value);
+            formData.append('owner_id', document.getElementById('ownerId').value);
+
+            // Agregar el archivo de imagen
+            const imageFile = document.getElementById('petImage').files[0];
+            if (imageFile) {
+                formData.append('petImage', imageFile);
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:3001/add_pet', {
+                    method: 'POST',
+                    body: formData // No establecer Content-Type, fetch lo hace automáticamente
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert('Mascota añadida exitosamente');
+                    location.reload();
+                } else {
+                    const error = await response.json();
+                    alert(error.message || 'Error al añadir mascota');
                 }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al conectar con el servidor');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const addOwnerForm = document.getElementById('addOwnerForm');
+
+    addOwnerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const ownerName = document.getElementById('ownerName').value;
+        const ownerEmail = document.getElementById('ownerEmail').value;
+        const ownerPhone = document.getElementById('ownerPhone').value;
+
+        const postData = {
+            name: ownerName,
+            email: ownerEmail,
+            phone: ownerPhone
+        };
+
+        try {
+            const response = await fetch('http://127.0.0.1:3001/add_owner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
             });
 
-            // Añadir nuevo dueño
-            document.getElementById('addPetForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('name', document.getElementById('petName').value);
-    formData.append('species', document.getElementById('petSpecies').value);
-    formData.append('breed', document.getElementById('petBreed').value);
-    formData.append('birth_date', document.getElementById('petBirthDate').value);
-    formData.append('owner_id', document.getElementById('ownerId').value);
-    formData.append('petImage', document.getElementById('petImage').files[0]);
-    
-    try {
-        const response = await fetch('http://127.0.0.1:3001/add_pet', {
-            method: 'POST',
-            body: formData
-        });
-        if (response.ok) {
-            alert('Mascota añadida exitosamente');
-            location.reload();
-        } else {
-            alert('Error al añadir mascota');
+            if (response.ok) {
+                const result = await response.json();
+                alert(result.message);
+                addOwnerForm.reset(); // Reinicia el formulario
+            } else {
+                const error = await response.json();
+                alert('Error: ' + error.message);
+            }
+        } catch (error) {
+            console.error('Error al añadir dueño:', error);
+            alert('Error al añadir dueño: ' + error.message);
         }
-    } catch (error) {
-        console.error('Error al añadir mascota:', error);
-    }
+    });
 });
 
-
-            // Añadir nueva mascota con imagen
-            document.getElementById('addPetForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('name', document.getElementById('petName').value);
-    formData.append('species', document.getElementById('petSpecies').value);
-    formData.append('breed', document.getElementById('petBreed').value);
-    formData.append('birth_date', document.getElementById('petBirthDate').value);
-    formData.append('owner_id', document.getElementById('ownerId').value);
-    formData.append('petImage', document.getElementById('petImage').files[0]);
-    
-    try {
-        const response = await fetch('http://127.0.0.1:3001/add_pet', {
-            method: 'POST',
-            body: formData
-        });
-        if (response.ok) {
-            alert('Mascota añadida exitosamente');
-            location.reload();
-        } else {
-            alert('Error al añadir mascota');
-        }
-    } catch (error) {
-        console.error('Error al añadir mascota:', error);
-    }
-});
-
-        </script>
+    </script>
 
 
 </body>
