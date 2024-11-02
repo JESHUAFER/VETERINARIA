@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCare - Inventario y Mascotas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/estilos/styles.css">
+    <link rel="stylesheet" href="/frontend/cuenta/inventario-dashboard.css">
+    
+    <style>
+        /* Estilos generales */
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          background-color: #f0f8ff;
+          color: #333;
+        }
+        
+        /* Cabecera */
+        header {
+          background-color: #1e90ff;
+          color: white;
+          padding: 1rem;
+          text-align: center;
+        }
+        
+        /* Contenedor principal */
+        .container {
+          max-width: 1200px;
+          margin: 2rem auto;
+          padding: 1rem;
+        }
+        
+        /* Título */
+        h1 {
+          color: #1e90ff;
+          text-align: center;
+          margin-bottom: 1.5rem;
+        }
+        
+        /* Grilla de productos */
+        .product-grid {
+          display: grid;
+          gap: 1.5rem;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        /* Tarjeta de producto */
+        .product-card {
+          background-color: white;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          padding: 1rem;
+          text-align: center;
+        }
+        
+        /* Imagen de producto */
+        .product-card img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+        }
+        
+        /* Nombre del producto */
+        .product-card h2 {
+          color: #1e90ff;
+          font-size: 1.25rem;
+          margin: 0.75rem 0;
+        }
+        
+        /* Precio */
+        .product-card p {
+          font-size: 1rem;
+          color: #333;
+        }
+        
+        /* Botón */
+        .product-card button {
+          background-color: #1e90ff;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          padding: 0.5rem 1rem;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+    
+        .product-card button:hover {
+          background-color: #4682b4;
+        }
+    
+        /* Responsivo */
+        @media (max-width: 600px) {
+          .container {
+            padding: 0.5rem;
+          }
+    
+          h1 {
+            font-size: 1.5rem;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <header>
+        <h1>Veterinaria Paws & Claws</h1>
+      </header>
+    
+      <main class="container">
+        <h1>Nuestros Productos</h1>
+        <div class="product-grid">
+          <!-- Producto 1 -->
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200" alt="Alimento para Perros">
+            <h2>Alimento para Perros</h2>
+            <p>Precio: $25.00</p>
+            <button>Comprar Ahora</button>
+          </div>
+    
+          <!-- Producto 2 -->
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200" alt="Juguete para Gatos">
+            <h2>Juguete para Gatos</h2>
+            <p>Precio: $15.00</p>
+            <button>Comprar Ahora</button>
+          </div>
+    
+          <!-- Producto 3 -->
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200" alt="Vitaminas para Mascotas">
+            <h2>Vitaminas para Mascotas</h2>
+            <p>Precio: $18.00</p>
+            <button>Comprar Ahora</button>
+          </div>
+    
+          <!-- Producto 4 -->
+          <div class="product-card">
+            <img src="https://via.placeholder.com/300x200" alt="Cama para Mascotas">
+            <h2>Cama para Mascotas</h2>
+            <p>Precio: $40.00</p>
+            <button>Comprar Ahora</button>
+          </div>
+        </div>
+      </main>
+    </body>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 PetCare. Todos los derechos reservados.</p>
+</footer>

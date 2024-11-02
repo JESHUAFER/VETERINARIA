@@ -14,12 +14,14 @@
             font-family: 'Jua', sans-serif;
             background-color: #f6f8fa;
         }
+
         .sidebar {
             background-color: #007bff;
             color: #fff;
             height: auto;
             padding: 1rem;
         }
+
         .sidebar a {
             color: #fff;
             text-decoration: none;
@@ -27,6 +29,7 @@
             padding: 0.5rem 0;
             font-size: 1.1rem;
         }
+
         .sidebar a:hover {
             background-color: #0056b3;
             border-radius: 5px;
@@ -77,25 +80,7 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/frontend/frontend/sesion.html">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/frontend/quienesSomos.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/frontend/portafolio.html">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/frontend/Contacto.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/frontend/logout.html">Logout</a>
-                    </li>
-                </ul>
-            </div>
+           
         </div>
     </nav>
     <div class="container-fluid">
@@ -107,150 +92,161 @@
                         <a href="/frontend/cuenta/inventario_mascotas.html" class="nav-link">Clientes</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/frontend/caja.html" class="nav-link">Caja</a>
+                        <a href="/frontend/cuenta/caja.html" class="nav-link">Caja</a>
                     </li>
                     <li class="nav-item">
                         <a href="/frontend/cuenta/agenda.html" class="nav-link">Agenda</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/frontend/productos.html" class="nav-link">Productos</a>
+                        <a href="/frontend//cuenta/productos.html" class="nav-link">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/frontend/cuenta/gestion_veterinaria.html" class="nav-link">Stock</a>
+                        <a href="/frontend/cuenta/gestion_veterinaria.html" class="nav-link">Gestion</a>
                     </li>
+
                     <li class="nav-item">
-                        <a href="/frontend/ventas.html" class="nav-link">Ventas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/frontend/proveedores.html" class="nav-link">Proveedores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/frontend/estadisticas.html" class="nav-link">Estadísticas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/frontend/micuenta.html" class="nav-link">Mi cuenta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/frontend/logout.html" class="nav-link">Salir</a>
+                        <a href="/frontend/sesion.html" class="nav-link">Salir</a>
                     </li>
                 </ul>
             </nav>
-    <div class="col-md-10 main-content">
-        <h2 class="text-primary">Agenda de Citas</h2>
-        <form id="appointmentForm">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="petOwner" class="form-label">Dueño de la Mascota</label>
-                    <select id="petOwner" class="form-select" required>
-                        <option selected disabled value="">Seleccione el dueño</option>
-                        <!-- Dueños se llenarán aquí -->
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="petName" class="form-label">Mascota</label>
-                    <select id="petName" class="form-select" required>
-                        <option selected disabled value="">Seleccione la mascota</option>
-                        <!-- Mascotas se llenarán aquí -->
-                    </select>
+            <div class="col-md-10 main-content">
+                <h2 class="text-primary">Agenda de Citas</h2>
+                <form id="appointmentForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="petOwner" class="form-label">Dueño de la Mascota</label>
+                            <select id="petOwner" class="form-select" required>
+                                <option selected disabled value="">Seleccione el dueño</option>
+                                <!-- Dueños se llenarán aquí -->
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="petName" class="form-label">Mascota</label>
+                            <select id="petName" class="form-select" required>
+                                <option selected disabled value="">Seleccione la mascota</option>
+                                <!-- Mascotas se llenarán aquí -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="appointmentDate" class="form-label">Fecha y Hora</label>
+                            <input type="datetime-local" id="appointmentDate" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="vetName" class="form-label">Veterinario</label>
+                            <input type="text" id="vetName" class="form-control" placeholder="Nombre del Veterinario"
+                                required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="notes" class="form-label">Notas</label>
+                            <textarea id="notes" class="form-control" rows="3"
+                                placeholder="Notas adicionales"></textarea>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Programar Cita</button>
+                    </div>
+                </form>
+
+
+                <!-- Edit Appointment Modal -->
+                <form id="editAppointmentForm" style="display: none;">
+                    <input type="hidden" id="editAppointmentId">
+                    <div class="mb-3">
+                        <label for="editAppointmentDate" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="editAppointmentDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAppointmentTime" class="form-label">Hora</label>
+                        <input type="time" class="form-control" id="editAppointmentTime" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAppointmentDescription" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="editAppointmentDescription" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </form>
+
+                <div class="table-responsive mt-4">
+                    <h4 class="text-primary">Citas Programadas</h4>
+                    <table id="tblCitas" class="table table-striped table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Dueño</th>
+                                <th>Mascota</th>
+                                <th>Fecha y Hora</th>
+                                <th>Veterinario</th>
+                                <th>Notas</th>
+                                <th class="text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Citas se llenarán aquí -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="appointmentDate" class="form-label">Fecha y Hora</label>
-                    <input type="datetime-local" id="appointmentDate" class="form-control" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="vetName" class="form-label">Veterinario</label>
-                    <input type="text" id="vetName" class="form-control" placeholder="Nombre del Veterinario" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label for="notes" class="form-label">Notas</label>
-                    <textarea id="notes" class="form-control" rows="3" placeholder="Notas adicionales"></textarea>
-                </div>
-            </div>
-            <div class="text-center mt-3">
-                <button type="submit" class="btn btn-primary">Programar Cita</button>
-            </div>
-        </form>
-        <div class="table-responsive mt-4">
-            <h4 class="text-primary">Citas Programadas</h4>
-            <table id="tblCitas" class="table table-striped table-hover table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Dueño</th>
-                        <th>Mascota</th>
-                        <th>Fecha y Hora</th>
-                        <th>Veterinario</th>
-                        <th>Notas</th>
-                        <th class="text-center">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Citas se llenarán aquí -->
-                </tbody>
-            </table>
         </div>
     </div>
-</div>
-</div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', async () => {
-                try {
-                    // Cargar lista de dueños
-                    const ownerResponse = await fetch('http://127.0.0.1:3001/owners');
-                    const owners = await ownerResponse.json();
-                    const petOwnerSelect = document.getElementById('petOwner');
-                    owners.forEach(owner => {
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Cargar lista de dueños
+                const ownerResponse = await fetch('http://127.0.0.1:3001/owners');
+                const owners = await ownerResponse.json();
+                const petOwnerSelect = document.getElementById('petOwner');
+                owners.forEach(owner => {
+                    const option = document.createElement('option');
+                    option.value = owner.owner_id;
+                    option.textContent = owner.name;
+                    petOwnerSelect.appendChild(option);
+                });
+
+                // Cargar lista de mascotas al seleccionar dueño
+                petOwnerSelect.addEventListener('change', async () => {
+                    const ownerId = petOwnerSelect.value;
+                    const petResponse = await fetch(`http://127.0.0.1:3001/owner_pets/${ownerId}`);
+                    const pets = await petResponse.json();
+                    const petNameSelect = document.getElementById('petName');
+                    petNameSelect.innerHTML = '<option selected disabled value="">Seleccione la mascota</option>'; // Limpiar mascotas anteriores
+                    pets.forEach(pet => {
                         const option = document.createElement('option');
-                        option.value = owner.owner_id;
-                        option.textContent = owner.name;
-                        petOwnerSelect.appendChild(option);
+                        option.value = pet.pet_id;
+                        option.textContent = pet.name;
+                        petNameSelect.appendChild(option);
                     });
-    
-                    // Cargar lista de mascotas al seleccionar dueño
-                    petOwnerSelect.addEventListener('change', async () => {
-                        const ownerId = petOwnerSelect.value;
-                        const petResponse = await fetch(`http://127.0.0.1:3001/owner_pets/${ownerId}`);
-                        const pets = await petResponse.json();
-                        const petNameSelect = document.getElementById('petName');
-                        petNameSelect.innerHTML = '<option selected disabled value="">Seleccione la mascota</option>'; // Limpiar mascotas anteriores
-                        pets.forEach(pet => {
-                            const option = document.createElement('option');
-                            option.value = pet.pet_id;
-                            option.textContent = pet.name;
-                            petNameSelect.appendChild(option);
-                        });
+                });
+
+                // Cargar citas programadas
+                const response = await fetch('http://127.0.0.1:3001/appointments');
+                const appointments = await response.json();
+                appointments.sort((a, b) => new Date(a.appointment_date) - new Date(b.appointment_date)); // Ordenar por fecha y hora
+
+                const tbody = document.querySelector('#tblCitas tbody');
+                tbody.innerHTML = ''; // Limpiar contenido previo
+
+                let currentMonth = '';
+                appointments.forEach(appointment => {
+                    const appointmentDate = new Date(appointment.appointment_date);
+                    const formattedDate = appointmentDate.toLocaleString('es-ES', {
+                        year: 'numeric', month: '2-digit', day: '2-digit',
+                        hour: '2-digit', minute: '2-digit'
                     });
-    
-                    // Cargar citas programadas
-                    const response = await fetch('http://127.0.0.1:3001/appointments');
-                    const appointments = await response.json();
-                    appointments.sort((a, b) => new Date(a.appointment_date) - new Date(b.appointment_date)); // Ordenar por fecha y hora
-    
-                    const tbody = document.querySelector('#tblCitas tbody');
-                    tbody.innerHTML = ''; // Limpiar contenido previo
-                    
-                    let currentMonth = '';
-                    appointments.forEach(appointment => {
-                        const appointmentDate = new Date(appointment.appointment_date);
-                        const formattedDate = appointmentDate.toLocaleString('es-ES', {
-                            year: 'numeric', month: '2-digit', day: '2-digit',
-                            hour: '2-digit', minute: '2-digit'
-                        });
-    
-                        const appointmentMonth = appointmentDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
-                        if (appointmentMonth !== currentMonth) {
-                            currentMonth = appointmentMonth;
-                            const monthRow = document.createElement('tr');
-                            monthRow.innerHTML = `<td colspan="6" class="table-secondary text-center"><strong>${currentMonth}</strong></td>`;
-                            tbody.appendChild(monthRow);
-                        }
-    
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
+
+                    const appointmentMonth = appointmentDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
+                    if (appointmentMonth !== currentMonth) {
+                        currentMonth = appointmentMonth;
+                        const monthRow = document.createElement('tr');
+                        monthRow.innerHTML = `<td colspan="6" class="table-secondary text-center"><strong>${currentMonth}</strong></td>`;
+                        tbody.appendChild(monthRow);
+                    }
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
                             <td>${appointment.owner_name}</td>
                             <td>${appointment.pet_name}</td>
                             <td>${formattedDate}</td>
@@ -261,66 +257,69 @@
                                 <a href="#" class="btn btn-danger btn-sm" onclick="deleteAppointment(${appointment.appointment_id})">Eliminar</a>
                             </td>
                         `;
-                        tbody.appendChild(row);
-                    });
-                } catch (error) {
-                    console.error('Error al cargar las citas:', error);
-                }
-            });
-    
-            async function editAppointment(id) {
-                // Lógica para editar la cita
-                alert('Editar cita: ' + id);
-                // Agrega aquí la lógica para editar la cita.
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error al cargar las citas:', error);
             }
-    
-            async function deleteAppointment(id) {
-                // Lógica para eliminar la cita
-                if (confirm('¿Está seguro de que desea eliminar esta cita?')) {
-                    try {
-                        const response = await fetch(`http://127.0.0.1:3001/appointments/${id}`, {
-                            method: 'DELETE',
-                        });
-                        if (response.ok) {
-                            alert('Cita eliminada exitosamente');
-                            location.reload();
-                        } else {
-                            alert('Error al eliminar la cita');
-                        }
-                    } catch (error) {
-                        console.error('Error al eliminar la cita:', error);
+        });
+
+       
+                    async function editAppointment(id) {
+                        // Lógica para editar la cita
+                        alert('Editar cita: ' + id);
+                        // Agrega aquí la lógica para editar la cita.
                     }
-                }
-            }
-    
-            document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const petId = document.getElementById('petName').value;
-                const appointmentDate = document.getElementById('appointmentDate').value;
-                const vetName = document.getElementById('vetName').value;
-                const notes = document.getElementById('notes').value;
-    
+        
+
+                   
+        async function deleteAppointment(id) {
+            // Lógica para eliminar la cita
+            if (confirm('¿Está seguro de que desea eliminar esta cita?')) {
                 try {
-                    const response = await fetch('http://127.0.0.1:3001/appointments', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ pet_id: petId, appointment_date: appointmentDate, vet_name: vetName, notes: notes })
+                    const response = await fetch(`http://127.0.0.1:3001/appointments/${id}`, {
+                        method: 'DELETE',
                     });
                     if (response.ok) {
-                        alert('Cita programada exitosamente');
+                        alert('Cita eliminada exitosamente');
                         location.reload();
                     } else {
-                        alert('Error al programar la cita');
+                        alert('Error al eliminar la cita');
                     }
                 } catch (error) {
-                    console.error('Error al programar la cita:', error);
+                    console.error('Error al eliminar la cita:', error);
                 }
-            });
-        </script>
-    
-    
+            }
+        }
+
+        document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const petId = document.getElementById('petName').value;
+            const appointmentDate = document.getElementById('appointmentDate').value;
+            const vetName = document.getElementById('vetName').value;
+            const notes = document.getElementById('notes').value;
+
+            try {
+                const response = await fetch('http://127.0.0.1:3001/appointments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ pet_id: petId, appointment_date: appointmentDate, vet_name: vetName, notes: notes })
+                });
+                if (response.ok) {
+                    alert('Cita programada exitosamente');
+                    location.reload();
+                } else {
+                    alert('Error al programar la cita');
+                }
+            } catch (error) {
+                console.error('Error al programar la cita:', error);
+            }
+        });
+    </script>
+
+
 </body>
 
 </html>
